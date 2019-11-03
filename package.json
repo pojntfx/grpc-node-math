@@ -6,9 +6,10 @@
   "bin": "src/cmd/server/math.js",
   "scripts": {
     "build-protoc": "mkdir -p .generated && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./.generated --grpc_out=./.generated --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin ./src/lib/proto/math.proto",
-    "build-pkg-amd64": "mkdir -p .bin && pkg ./src/cmd/server/math.js -t linux-x64 -o .bin/math-grpc-node-server-amd64",
-    "build-pkg-arm64": "mkdir -p ~/.pkg-cache/v2.6/ && wget https://github.com/robertsLando/pkg-binaries/blob/master/arm64/fetched-v12.2.0-linux-arm64?raw=true -O ~/.pkg-cache/v2.6/fetched-v12.2.0-linux-arm64 && mkdir -p .bin && pkg ./src/cmd/server/math.js -t linux-arm64 -o .bin/math-grpc-node-server-arm64",
-    "build": "npm run build-protoc && npm run build-pkg-amd64; npm run build-pkg-arm64 &> /dev/null; chmod +x ./.bin/*",
+    "build-pkg-linux-amd64": "mkdir -p .bin && pkg ./src/cmd/server/math.js -t linux-x64 -o .bin/math-grpc-node-server-linux-amd64",
+    "build-pkg-linux-arm64": "mkdir -p ~/.pkg-cache/v2.6/ && wget https://github.com/robertsLando/pkg-binaries/blob/master/arm64/fetched-v12.2.0-linux-arm64?raw=true -O ~/.pkg-cache/v2.6/fetched-v12.2.0-linux-arm64 && mkdir -p .bin && pkg ./src/cmd/server/math.js -t linux-arm64 -o .bin/math-grpc-node-server-linux-arm64",
+    "build-pkg-darwin-amd64": "mkdir -p .bin && pkg ./src/cmd/server/math.js -t macos-x64 -o .bin/math-grpc-node-server-darwin-amd64",
+    "build": "npm run build-protoc && npm run build-pkg-linux-amd64; npm run build-pkg-linux-arm64 &> /dev/null; npm run build-pkg-darwin-amd64; chmod +x ./.bin/*",
     "start": "node src/cmd/server/math.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

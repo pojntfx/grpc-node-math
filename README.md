@@ -9,11 +9,17 @@ A simple math GRPC microservice, for the purpose of learning and evaluating Node
 
 ## Usage
 
+Binaries are made available on the [releases page](https://github.com/pojntfx/math-grpc-node/releases/latest). Alternatively, run the commands below to install from source:
+
 ```bash
-# Compile the protos
-npm run generate
-# Run
-npm start
+# Build
+npm run build
+# Install
+sudo install ./.bin/math-grpc-node-server-linux-amd64 /usr/local/bin
+# or
+sudo install ./.bin/math-grpc-node-server-linux-arm64 /usr/local/bin
+# or
+sudo install ./.bin/math-grpc-node-server-darwin-amd64 /usr/local/bin
 ```
 
 ## License
