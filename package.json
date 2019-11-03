@@ -1,0 +1,30 @@
+{
+  "name": "grpc-node-math",
+  "version": "1.0.0",
+  "description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
+  "main": "src/lib/svc/math.js",
+  "bin": "src/cmd/server/math.js",
+  "scripts": {
+    "start": "node src/cmd/server/math.js",
+    "generate": "mkdir -p .generated && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./.generated --grpc_out=./.generated --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin ./src/lib/proto/math.proto",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pojntfx/grpc-node-math.git"
+  },
+  "author": "Felix Pojtinger <felix@pojtinger.com>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/pojntfx/grpc-node-math/issues"
+  },
+  "homepage": "https://github.com/pojntfx/grpc-node-math#readme",
+  "devDependencies": {
+    "grpc-tools": "^1.8.0"
+  },
+  "dependencies": {
+    "commander": "^4.0.0",
+    "google-protobuf": "^3.10.0",
+    "grpc": "^1.24.2"
+  }
+}
