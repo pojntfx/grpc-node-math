@@ -1,0 +1,22 @@
+sudo: required
+language: node_js
+dist: bionic
+node_js:
+  - '12'
+addons:
+  apt:
+    update: true
+
+before_install:
+  - sudo apt install -y wget protobuf-compiler
+script:
+  - npm run build
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  file:
+    - .bin/math-grpc-node-server-arm64
+    - .bin/math-grpc-node-server-amd64
+  on:
+    repo: pojntfx/math-grpc-node
