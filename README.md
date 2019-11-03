@@ -1,4 +1,4 @@
-# Felicitas Pojtinger's gRPC Node Math Microservice
+# Felicitas Pojtinger's Math gRPC Node Microservice
 
 A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.
 
