@@ -14,8 +14,9 @@ deploy:
   skip_cleanup: true
   provider: releases
   file:
-    - .bin/math-grpc-node-server-arm64
-    - .bin/math-grpc-node-server-amd64
+    - .bin/math-grpc-node-server-linux-arm64
+    - .bin/math-grpc-node-server-linux-amd64
+    - .bin/math-grpc-node-server-darwin-amd64
   api_key:
     secure: MlHdhUgQJSiCKv2R/dYejYuBIThwFYGBaXAiRS5KbmRPGd6V5+U1WIXKHqzt1Wgb34HBUtgUgTUkuL8cg+c9SM50VXrBRVHckfYULYaqJnYfg3R3lfgBGhn3+crGrPpd0M40ryHAgMoNe0j/Q98DtZ7tKgpLmZY2e/deIeGBE+7cuFslbX2G2VIV/RlixZGQq5Wn33sRobE2ExCeT8XnYw+wps4eqzzPgTG7keXAJ5ZOHLXQEu4phU0NyLPcf0cna6gnIKP6dYi9Fy7jL6xxUCWeqndBaB7RQC2lmAPL9a7P4Abva4ZRu3xGdstnELTuoCAhsH2MNDauswTjNyEhhvF+dHydyTQwyW5h/391qj/48PMcCrKsKmMqq+i+KjEYFh1BHxmawBQoTFuCxfYr1iGowCk2+2m+felrZsWtMBIEGeqmS1M9uwuAjQQQdlliy9BGHdtuVzGiEEM0yDlYixF/40mEUO91YO+r4lrOLDPCdQHW95eFiP2qiz24IBDeh5z/wPqk1RVlb5L8y1bBfNQf5NnFlC9B9XIQX99+9UTK+vWzKjyidx5ryczg8DuGw40mJRxF1RU32rYn2X5LVlBgyZhhfaWUVw12n9zfMBDl9Xju6og5zec35NDmTsrKohceYuZbbrVHXStEKtWF6yFjKTugA84L+3ykNQProuM=
   on:
