@@ -15,7 +15,7 @@ A simple math GRPC microservice, for the purpose of learning and evaluating Node
 
 Binaries are made available on the [releases page](https://github.com/pojntfx/math-grpc-node/releases/latest). Place the `grpc_node.node-${PLATFORM}-${ARCHITECTURE}`-file in the same directory as the binary itself. It contains the gRPC C library, which can't be packaged into the binary. Note: There is currently no way to use this microservice on `arm64`; see [#14741](https://github.com/grpc/grpc/issues/14741).
 
-### From NPM
+### npm Package
 
 ```bash
 # Install
@@ -25,7 +25,17 @@ npm install -g pojntfx/math-grpc-node
 math-grpc-node-server
 ```
 
-### Build Binaries From Source
+### From Source Without Building Binaries
+
+```bash
+# Build protos
+npm run build-protoc
+
+# Run
+npm start
+```
+
+### From Source With Building Binaries
 
 ```bash
 # Build protos
@@ -54,16 +64,6 @@ math-grpc-node-server-linux-amd64
 # math-grpc-node-server-linux-arm64
 # or
 math-grpc-node-server-darwin-amd64
-```
-
-### Run From Source Without Building Binaries
-
-```bash
-# Build protos
-npm run build-protoc
-
-# Run
-npm start
 ```
 
 ## License
