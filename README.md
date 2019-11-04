@@ -31,6 +31,23 @@ sudo install ./.bin/grpc_node.node-linux-arm64 /usr/local/bin
 # or
 sudo install ./.bin/math-grpc-node-server-darwin-amd64 /usr/local/bin
 sudo install ./.bin/grpc_node.node-darwin-amd64 /usr/local/bin
+
+# Run
+math-grpc-node-server-linux-amd64
+# or
+math-grpc-node-server-linux-arm64
+# or
+math-grpc-node-server-darwin-amd64
+```
+
+You may also run the commands below to run without binary compilation:
+
+```bash
+# Build protos
+npm run build-protoc
+
+# Run
+npm start
 ```
 
 ## License
