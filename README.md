@@ -1,5 +1,7 @@
 # Felicitas Pojtinger's Math gRPC Node Microservice
 
+[![Build Status](https://travis-ci.com/pojntfx/math-grpc-node.svg?branch=master)](https://travis-ci.com/pojntfx/math-grpc-node)
+
 A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.
 
 ## Features
