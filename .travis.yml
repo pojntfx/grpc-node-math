@@ -36,6 +36,7 @@ script:
   - if [ "$OS" = "linux-amd64" ]; then npm run build-pkg-linux-amd64; fi
   - if [ "$OS" = "linux-arm64" ]; then npm run build-pkg-linux-arm64; fi
   - if [ "$OS" = "darwin-amd64" ]; then npm run build-pkg-darwin-amd64; fi
+  - rm -rf ./node_modules/
 
 deploy:
   cleanup: false
