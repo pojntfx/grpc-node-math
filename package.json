@@ -2,14 +2,16 @@
   "name": "math-grpc-node",
   "version": "1.0.0",
   "description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
-  "main": "src/lib/svc/math.js",
-  "bin": "src/cmd/server/math",
+  "main": "./src/lib/svc/math.js",
+  "bin": {
+    "math-grpc-node-server": "./src/cmd/server/math"
+  },
   "scripts": {
-    "build-protoc": "mkdir -p .generated && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./.generated --grpc_out=./.generated --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin ./src/lib/proto/math.proto",
-    "build-pkg-linux-amd64": "mkdir -p .bin && pkg ./src/cmd/server/math -t linux-x64 -o .bin/math-grpc-node-server-linux-amd64 && cp node_modules/grpc/src/node/extension_binary/*/grpc_node.node .bin/grpc_node.node-linux-amd64",
-    "build-pkg-linux-arm64": "# mkdir -p ~/.pkg-cache/v2.6/ && wget https://github.com/robertsLando/pkg-binaries/blob/master/arm64/fetched-v12.2.0-linux-arm64?raw=true -O ~/.pkg-cache/v2.6/fetched-v12.2.0-linux-arm64 && mkdir -p .bin && pkg ./src/cmd/server/math -t linux-arm64 -o .bin/math-grpc-node-server-linux-arm64 && cp node_modules/grpc/src/node/extension_binary/*/grpc_node.node .bin/grpc_node.node-linux-arm64",
-    "build-pkg-darwin-amd64": "mkdir -p .bin && pkg ./src/cmd/server/math -t macos-x64 -o .bin/math-grpc-node-server-darwin-amd64 && cp node_modules/grpc/src/node/extension_binary/*/grpc_node.node .bin/grpc_node.node-darwin-amd64",
-    "start": "node src/cmd/server/math",
+    "build-protoc": "mkdir -p ./.generated && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./.generated --grpc_out=./.generated --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin ./src/lib/proto/math.proto",
+    "build-pkg-linux-amd64": "mkdir -p ./.bin && pkg ./src/cmd/server/math -t linux-x64 -o ./.bin/math-grpc-node-server-linux-amd64 && cp ./node_modules/grpc/src/node/extension_binary/*/grpc_node.node ./.bin/grpc_node.node-linux-amd64",
+    "build-pkg-linux-arm64": "# mkdir -p ~/.pkg-cache/v2.6/ && wget https://github.com/robertsLando/pkg-binaries/blob/master/arm64/fetched-v12.2.0-linux-arm64?raw=true -O ~/.pkg-cache/v2.6/fetched-v12.2.0-linux-arm64 && mkdir -p ./.bin && pkg ./src/cmd/server/math -t linux-arm64 -o ./.bin/math-grpc-node-server-linux-arm64 && cp ./node_modules/grpc/src/node/extension_binary/*/grpc_node.node ./.bin/grpc_node.node-linux-arm64",
+    "build-pkg-darwin-amd64": "mkdir -p ./.bin && pkg ./src/cmd/server/math -t macos-x64 -o ./.bin/math-grpc-node-server-darwin-amd64 && cp ./node_modules/grpc/src/node/extension_binary/*/grpc_node.node ./.bin/grpc_node.node-darwin-amd64",
+    "start": "node ./src/cmd/server/math",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
