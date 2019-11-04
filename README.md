@@ -7,7 +7,7 @@ A simple math GRPC microservice, for the purpose of learning and evaluating Node
 ## Features
 
 - Add numbers
-- Delete numbers
+- Subtract numbers
 
 ## Usage
 
