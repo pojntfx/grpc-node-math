@@ -18,7 +18,7 @@ addons:
       - wget
       - protobuf
 script:
-  - npm run build-protobuf
+  - npm run build-protoc
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run build-pkg-linux-amd64; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run build-pkg-darwin-amd64; fi
 deploy:
