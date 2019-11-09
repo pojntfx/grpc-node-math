@@ -1,4 +1,4 @@
-const { series } = require("gulp");
+const gulp = require("gulp");
 const shell = require("shelljs");
 const path = require("path");
 const commander = require("commander");
@@ -20,7 +20,7 @@ const protocBuild = cb => {
 	cb();
 };
 
-const nccBuild = async cb => {
+const nccBuild = cb => {
 	shell.mkdir("-p", ".build");
 	shell.exec(
 		`${path.join(
@@ -128,6 +128,17 @@ const run = cb => {
 	cb();
 };
 
+const watch = () => {
+	gulp.watch(
+		[
+			"./src/cmd/**/*",
+			"./src/lib/svc/*.js",
+			"./src/lib/proto/*.proto"
+		],
+		gulp.series(protocBuild, nccBuild, run)
+	);
+};
+
 exports.default = protocBuild;
 exports.protocBuild = protocBuild;
 exports.nccBuild = nccBuild;
@@ -135,3 +146,4 @@ exports.pkgBuildBinary = pkgBuildBinary;
 exports.pkgInstallBinary = pkgInstallBinary;
 exports.clean = clean;
 exports.run = run;
+exports.watch = gulp.series(protocBuild, nccBuild, watch);
