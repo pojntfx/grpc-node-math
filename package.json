@@ -2,16 +2,16 @@
 	"name": "math-grpc-node",
 	"version": "1.0.0",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
-	"main": "./src/lib/svc/math.js",
+	"main": "./.build/index.js/index.js",
 	"bin": {
-		"math-grpc-node-server": "./src/cmd/server/math"
+		"math-grpc-node-server": "./.build/index.js/index.js"
 	},
 	"scripts": {
 		"protoc-build": "gulp",
 		"ncc-build": "gulp nccBuild",
 		"pkg-build-binary-linux-amd64": "gulp pkgBuildBinary --platform linux --architecture amd64",
 		"pkg-build-binary-darwin-amd64": "gulp pkgBuildBinary --platform darwin --architecture amd64",
-		"start": "node ./src/cmd/server/math",
+		"start": "./src/cmd/server/math",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
