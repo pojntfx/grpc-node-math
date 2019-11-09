@@ -110,6 +110,15 @@ const pkgInstallBinary = cb => {
 		),
 		path.join("/usr", "local", "bin", "math-grpc-node-server")
 	);
+
+	cb();
+};
+
+const clean = cb => {
+	shell.rm("-rf", ".bin");
+	shell.rm("-rf", ".build");
+	shell.rm("-rf", ".generated");
+
 	cb();
 };
 
@@ -124,4 +133,5 @@ exports.protocBuild = protocBuild;
 exports.nccBuild = nccBuild;
 exports.pkgBuildBinary = pkgBuildBinary;
 exports.pkgInstallBinary = pkgInstallBinary;
+exports.clean = clean;
 exports.run = run;
