@@ -3,6 +3,7 @@ const shell = require("shelljs");
 const path = require("path");
 const pkg = require("pkg");
 const commander = require("commander");
+const ncc = require("@zeit/ncc");
 
 const protocBuild = cb => {
 	shell.mkdir("-p", ".generated");
@@ -17,6 +18,25 @@ const protocBuild = cb => {
 			"grpc_tools_node_protoc_plugin"
 		)} ${path.join("src", "lib", "proto", "math.proto")}`
 	);
+
+	cb();
+};
+
+const nccBuild = async cb => {
+	shell.mkdir("-p", ".build");
+	shell.exec(
+		`${path.join(
+			"node_modules",
+			".bin",
+			"ncc"
+		)} build --out ${path.join((".build", "index.js"))} ${path.join(
+			"src",
+			"cmd",
+			"server",
+			"math"
+		)}`
+	);
+
 	cb();
 };
 
@@ -69,4 +89,5 @@ const pkgBuildBinary = cb => {
 
 exports.default = protocBuild;
 exports.protocBuild = protocBuild;
+exports.nccBuild = nccBuild;
 exports.pkgBuildBinary = pkgBuildBinary;
