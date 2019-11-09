@@ -29,7 +29,7 @@ const nccBuild = async cb => {
 			"node_modules",
 			".bin",
 			"ncc"
-		)} build --out ${path.join((".build", "index.js"))} ${path.join(
+		)} build --out ${path.join(".build", "index.js")} ${path.join(
 			"src",
 			"cmd",
 			"server",
