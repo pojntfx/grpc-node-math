@@ -29,7 +29,7 @@ math-grpc-node-server
 
 ```bash
 # Build protos
-npm run build-protoc
+npm run protoc-build
 
 # Run
 npm start
@@ -39,7 +39,7 @@ npm start
 
 ```bash
 # Build protos
-npm run build-protoc
+npm run protoc-build
 
 # Build
 npm run build-pkg-linux-amd64
