@@ -13,6 +13,7 @@
 		"pkg-build-binary-darwin-amd64": "gulp pkgBuildBinary --platform darwin --architecture amd64",
 		"pkg-install-binary-linux-amd64": "gulp pkgInstallBinary --platform linux --architecture amd64",
 		"pkg-install-binary-darwin-amd64": "gulp pkgInstallBinary --platform darwin --architecture amd64",
+		"clean": "gulp clean",
 		"start": "gulp run",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
