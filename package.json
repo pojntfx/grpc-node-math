@@ -8,6 +8,7 @@
 	},
 	"scripts": {
 		"protoc-build": "gulp",
+		"ncc-build": "gulp nccBuild",
 		"pkg-build-binary-linux-amd64": "gulp pkgBuildBinary --platform linux --architecture amd64",
 		"pkg-build-binary-darwin-amd64": "gulp pkgBuildBinary --platform darwin --architecture amd64",
 		"start": "node ./src/cmd/server/math",
@@ -24,6 +25,7 @@
 	},
 	"homepage": "https://github.com/pojntfx/grpc-node-math#readme",
 	"devDependencies": {
+		"@zeit/ncc": "^0.20.5",
 		"grpc-tools": "^1.8.0",
 		"gulp": "^4.0.2",
 		"pkg": "^4.4.0",
