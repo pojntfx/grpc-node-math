@@ -1,9 +1,7 @@
 const { series } = require("gulp");
 const shell = require("shelljs");
 const path = require("path");
-const pkg = require("pkg");
 const commander = require("commander");
-const ncc = require("@zeit/ncc");
 
 const protocBuild = cb => {
 	shell.mkdir("-p", ".generated");
@@ -87,7 +85,43 @@ const pkgBuildBinary = cb => {
 	cb();
 };
 
+const pkgInstallBinary = cb => {
+	commander.option(
+		"-p, --platform <platform>",
+		"Platform to build the binary for"
+	);
+	commander.option(
+		"-a, --architecture <architecture>",
+		"Architecture to build the binary for"
+	);
+	commander.parse(process.argv);
+
+	shell.cp(
+		path.join(
+			".bin",
+			`grpc_node.node-${commander.platform}-${commander.architecture}`
+		),
+		path.join("/usr", "local", "bin", "grpc_node.node")
+	);
+	shell.cp(
+		path.join(
+			".bin",
+			`math-grpc-node-server-${commander.platform}-${commander.architecture}`
+		),
+		path.join("/usr", "local", "bin", "math-grpc-node-server")
+	);
+	cb();
+};
+
+const run = cb => {
+	shell.exec(path.join(".build", "index.js", "index.js"));
+
+	cb();
+};
+
 exports.default = protocBuild;
 exports.protocBuild = protocBuild;
 exports.nccBuild = nccBuild;
 exports.pkgBuildBinary = pkgBuildBinary;
+exports.pkgInstallBinary = pkgInstallBinary;
+exports.run = run;
