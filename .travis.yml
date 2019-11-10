@@ -31,6 +31,7 @@ deploy:
           on:
                   repo: pojntfx/mather.js
                   all_branches: true
+          skip_cleanup: true
         - provider: npm
           email: felix@pojtinger.com
           api_key:
@@ -38,3 +39,4 @@ deploy:
           on:
                   repo: pojntfx/mather.js
                   all_branches: true
+          skip_cleanup: true
