@@ -1,6 +1,6 @@
 {
-	"name": "math-grpc-node",
-	"version": "1.0.0",
+	"name": "mather.js",
+	"version": "0.0.1",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
 	"main": "./.build/index.js/index.js",
 	"bin": {
