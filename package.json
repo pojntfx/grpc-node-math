@@ -1,19 +1,18 @@
 {
 	"name": "mather.js",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
-	"main": "./.build/index.js/index.js",
+	"main": "./src/lib/svc/math.js",
 	"bin": {
-		"math-grpc-node-server": "./.build/index.js/index.js"
+		"math-grpc-node-server": "./src/cmd/server/math"
 	},
 	"scripts": {
 		"protoc-build": "gulp",
-		"ncc-build": "gulp nccBuild",
+		"build": "npm run protoc-build",
 		"pkg-build-binary-linux-amd64": "gulp pkgBuildBinary --platform linux --architecture amd64",
 		"pkg-build-binary-darwin-amd64": "gulp pkgBuildBinary --platform darwin --architecture amd64",
 		"pkg-install-binary-linux-amd64": "gulp pkgInstallBinary --platform linux --architecture amd64",
 		"pkg-install-binary-darwin-amd64": "gulp pkgInstallBinary --platform darwin --architecture amd64",
-		"build": "npm run protoc-build && npm run ncc-build",
 		"clean": "gulp clean",
 		"run": "gulp run",
 		"start": "npm run run",
@@ -33,7 +32,6 @@
 	},
 	"homepage": "https://github.com/pojntfx/grpc-node-math#readme",
 	"devDependencies": {
-		"@zeit/ncc": "^0.20.5",
 		"grpc-tools": "^1.8.0",
 		"gulp": "^4.0.2",
 		"pkg": "^4.4.0",

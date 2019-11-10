@@ -20,24 +20,6 @@ const protocBuild = cb => {
 	cb();
 };
 
-const nccBuild = cb => {
-	shell.mkdir("-p", ".build");
-	shell.exec(
-		`${path.join(
-			"node_modules",
-			".bin",
-			"ncc"
-		)} build --out ${path.join(".build", "index.js")} ${path.join(
-			"src",
-			"cmd",
-			"server",
-			"math"
-		)}`
-	);
-
-	cb();
-};
-
 const pkgBuildBinary = cb => {
 	commander.option(
 		"-p, --platform <platform>",
@@ -135,15 +117,14 @@ const watch = () => {
 			"./src/lib/svc/*.js",
 			"./src/lib/proto/*.proto"
 		],
-		gulp.series(protocBuild, nccBuild, run)
+		gulp.series(protocBuild, run)
 	);
 };
 
 exports.default = protocBuild;
 exports.protocBuild = protocBuild;
-exports.nccBuild = nccBuild;
 exports.pkgBuildBinary = pkgBuildBinary;
 exports.pkgInstallBinary = pkgInstallBinary;
 exports.clean = clean;
 exports.run = run;
-exports.watch = gulp.series(protocBuild, nccBuild, watch);
+exports.watch = gulp.series(protocBuild, watch);
