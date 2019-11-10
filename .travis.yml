@@ -14,10 +14,10 @@ jobs:
                   arch: amd64
                   env: OS=darwin-amd64
 script:
+        - if [ -d node_modules/ ]; then rm -rf ./node_modules/; fi
         - npm run protoc-build
         - if [ "$OS" = "linux-amd64" ]; then npm run pkg-build-binary-linux-amd64; fi
         - if [ "$OS" = "darwin-amd64" ]; then npm run pkg-build-binary-darwin-amd64; fi
-        - rm -rf ./node_modules/
 
 deploy:
         - provider: releases
