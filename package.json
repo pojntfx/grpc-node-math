@@ -1,6 +1,6 @@
 {
 	"name": "mather.js",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
 	"main": "./src/lib/svc/math.js",
 	"bin": {
@@ -19,6 +19,7 @@
 		"watch": "gulp run",
 		"dev": "npm run watch",
 		"prepare": "npm run build",
+		"install": "npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
