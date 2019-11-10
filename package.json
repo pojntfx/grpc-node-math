@@ -1,6 +1,6 @@
 {
 	"name": "mather.js",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
 	"main": "./.build/index.js/index.js",
 	"bin": {
@@ -45,5 +45,9 @@
 	},
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"files": [
+		"/.build",
+		"/.generated"
+	]
 }
