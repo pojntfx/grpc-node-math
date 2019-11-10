@@ -13,6 +13,7 @@
 		"pkg-build-binary-darwin-amd64": "gulp pkgBuildBinary --platform darwin --architecture amd64",
 		"pkg-install-binary-linux-amd64": "gulp pkgInstallBinary --platform linux --architecture amd64",
 		"pkg-install-binary-darwin-amd64": "gulp pkgInstallBinary --platform darwin --architecture amd64",
+		"build": "npm run protoc-build && npm run ncc-build",
 		"clean": "gulp clean",
 		"run": "gulp run",
 		"start": "npm run run",

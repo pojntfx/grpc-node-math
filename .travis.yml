@@ -17,6 +17,7 @@ script:
         - if [ -d node_modules/ ]; then rm -rf ./node_modules/; fi
         - npm ci
         - npm run protoc-build
+        - npm run ncc-build
         - if [ "$OS" = "linux-amd64" ]; then npm run pkg-build-binary-linux-amd64; fi
         - if [ "$OS" = "darwin-amd64" ]; then npm run pkg-build-binary-darwin-amd64; fi
 
