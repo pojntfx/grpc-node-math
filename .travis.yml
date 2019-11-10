@@ -1,12 +1,10 @@
 language: node_js
 node_js:
         - "12"
-
 os:
         - linux
         - osx
 dist: bionic
-
 jobs:
         include:
                 - os: linux
@@ -15,7 +13,6 @@ jobs:
                 - os: osx
                   arch: amd64
                   env: OS=darwin-amd64
-
 script:
         - npm run protoc-build
         - if [ "$OS" = "linux-amd64" ]; then npm run pkg-build-binary-linux-amd64; fi
@@ -23,15 +20,21 @@ script:
         - rm -rf ./node_modules/
 
 deploy:
-        skip_cleanup: true
-        provider: releases
-        file:
-                - ./.bin/math-grpc-node-server-linux-amd64
-                - ./.bin/math-grpc-node-server-darwin-amd64
-                - ./.bin/grpc_node.node-linux-amd64
-                - ./.bin/grpc_node.node-darwin-amd64
-        api_key:
-                secure: TmP5Xl+Cg7bCSOX/ra4eOWif1O1B3sP0RRW0NW69TMQNgRtalfCchZJyEW0XauUH5Qcsq03s+TTp0jb3C5U7FKXkl/C5rkdh825yBCREtVmy6r9J0lZHSMej0WabHg5ccCY9KDZbSHWw1kxOfPihIJqjEcUai5mKXebjN9ynPXcWvywSMGx0YSy9YeVaTrIRn4o4XQbwxJ4fzhCQJKev/fljsO0B85O2fIXcb7BToyHll8/BF3k0AmjfLQMmoguGoD3K4BI5ZS5YRYb2bCsZsJx1NYdjTQlLzsOVUEIXlg6x1kh9wb1+BUTyrKwxe7MyoMz7lLvx8iSbvCA7PZVlst9bfCgmxn0KtAIyTNV9NE5tYKYjdBmOOJ4Slg549KVX4EAvPeCf7R5RGuL7++Yvc08/tCNno4J86M38Hq8BLQhbH601y+PCG7MkT8v8ahz65az/yBXGCd7adMHIaIQG6ANorZvZTp1NOf7kQ0b3EPMs4qaVzdeVUkt2RGmbT2kNwmltZfEQv1btgLUjxZZf6RN8ASqQ9hqmahWSZhH6g1CEF8zmDI+Kpz3Ufz3SA06Z0jgE/RRqHSnZsa0Usl+i8sjfL1kRDVGGeAfppI6oEc5djVJtgkP/B9ZgDiBmUzryo8+ORRuDnNp0GWSKrKD7GY1NZp66g122Rj8wIWIdmkY=
-        on:
-                repo: pojntfx/mather.js
-                all_branches: true
+        - provider: releases
+          file:
+                  - ./.bin/math-grpc-node-server-linux-amd64
+                  - ./.bin/math-grpc-node-server-darwin-amd64
+                  - ./.bin/grpc_node.node-linux-amd64
+                  - ./.bin/grpc_node.node-darwin-amd64
+          api_key:
+                  secure: TmP5Xl+Cg7bCSOX/ra4eOWif1O1B3sP0RRW0NW69TMQNgRtalfCchZJyEW0XauUH5Qcsq03s+TTp0jb3C5U7FKXkl/C5rkdh825yBCREtVmy6r9J0lZHSMej0WabHg5ccCY9KDZbSHWw1kxOfPihIJqjEcUai5mKXebjN9ynPXcWvywSMGx0YSy9YeVaTrIRn4o4XQbwxJ4fzhCQJKev/fljsO0B85O2fIXcb7BToyHll8/BF3k0AmjfLQMmoguGoD3K4BI5ZS5YRYb2bCsZsJx1NYdjTQlLzsOVUEIXlg6x1kh9wb1+BUTyrKwxe7MyoMz7lLvx8iSbvCA7PZVlst9bfCgmxn0KtAIyTNV9NE5tYKYjdBmOOJ4Slg549KVX4EAvPeCf7R5RGuL7++Yvc08/tCNno4J86M38Hq8BLQhbH601y+PCG7MkT8v8ahz65az/yBXGCd7adMHIaIQG6ANorZvZTp1NOf7kQ0b3EPMs4qaVzdeVUkt2RGmbT2kNwmltZfEQv1btgLUjxZZf6RN8ASqQ9hqmahWSZhH6g1CEF8zmDI+Kpz3Ufz3SA06Z0jgE/RRqHSnZsa0Usl+i8sjfL1kRDVGGeAfppI6oEc5djVJtgkP/B9ZgDiBmUzryo8+ORRuDnNp0GWSKrKD7GY1NZp66g122Rj8wIWIdmkY=
+          on:
+                  repo: pojntfx/mather.js
+                  all_branches: true
+        - provider: npm
+          email: felicitas@pojtinger.com
+          api_key:
+                  secure: bszlVGTJGdEMFvi8bwaTFGfKhVftSGQLt6+bEspkgLlfSV90EdRGDAt5GDkzsviq9fVfFkLApSMCpPhocnQnWBxFSFA+//kE8G4tELxPCION817yZeoD1rHe5Co+oRErfqaSBF9AfOWDLEq0ju9dqK8CTmI/3E1cRcgk0EUWcypqbzvT3rQkIT356wTTdO9yjDEziw+nx6/RxZpEd+RHYLSSNGA4bsrIDziJgScnUkiJUb39bfFejnZa2MCFz7ImOfbJ6My037gSeB57kologtpSv4MyY2T4NDln0izV8kAayjLDJPIya35qvhxlYJK0ngO48nDtYaxCuaRvok2ji39mQc1VMc6427OwzrOaWdrQvQUIGu0hP9LvVYx5QWMhngcWHZch38HQYG9IjipVLiqaakYgHatb7f6Gc9PzqurpQD6sfN+Rnh8yZ4swzv5Wq+vUpK7Z8Jn2XsPIFirPnC/OiBYd84KVzPuw3iEgnteOI5Z0BUXBa4ioQxODt+JgKMOnbMWX5UMtMARuzBdpUkpSABIVXTKgrftoZ1XpdYnVCJwDVPwxNkUA4kv9D0GWCT8KH+gFXZwycbHeY7oYt1kW53e3U2NgqInW9QaHWZ+WXLkHOeCa3eGUX31QaPzefNrtYOUdyfXKTisBZVIllsHZiLyDrmFYjN7iD6osDgY=
+          on:
+                  repo: pojntfx/mather.js
+                  all_branches: true
