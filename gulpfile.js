@@ -4,17 +4,25 @@ const path = require("path");
 const commander = require("commander");
 
 const protocBuild = cb => {
-	shell.mkdir("-p", ".generated");
+	shell.mkdir("-p", path.join(__dirname, ".generated"));
 	shell.exec(
 		`${path.join(
+			__dirname,
 			"node_modules",
 			".bin",
 			"grpc_tools_node_protoc"
 		)} --js_out=import_style=commonjs,binary:.generated --grpc_out=.generated --plugin=protoc-gen-grpc=${path.join(
+			__dirname,
 			"node_modules",
 			".bin",
 			"grpc_tools_node_protoc_plugin"
-		)} ${path.join("src", "lib", "proto", "math.proto")}`
+		)} -I${path.join(__dirname, "src", "lib", "proto")} ${path.join(
+			__dirname,
+			"src",
+			"lib",
+			"proto",
+			"math.proto"
+		)}`
 	);
 
 	cb();
@@ -31,18 +39,25 @@ const pkgBuildBinary = cb => {
 	);
 	commander.parse(process.argv);
 
-	shell.mkdir("-p", ".bin");
+	shell.mkdir("-p", path.join(__dirname, ".bin"));
 
 	const target = commander.platform === "darwin" ? "macos" : "linux";
 	const architecture = "x64";
 
 	shell.exec(
-		`${path.join("node_modules", ".bin", "pkg")} ${path.join(
+		`${path.join(
+			__dirname,
+			"node_modules",
+			".bin",
+			"pkg"
+		)} ${path.join(
+			__dirname,
 			"src",
 			"cmd",
 			"server",
 			"math"
 		)} --target ${target}-${architecture} --output ${path.join(
+			__dirname,
 			".bin",
 			`math-grpc-node-server-${commander.platform}-${commander.architecture}`
 		)}`
@@ -50,6 +65,7 @@ const pkgBuildBinary = cb => {
 
 	shell.cp(
 		path.join(
+			__dirname,
 			"node_modules",
 			"grpc",
 			"src",
@@ -59,6 +75,7 @@ const pkgBuildBinary = cb => {
 			"grpc_node.node"
 		),
 		path.join(
+			__dirname,
 			".bin",
 			`grpc_node.node-${commander.platform}-${commander.architecture}`
 		)
@@ -80,6 +97,7 @@ const pkgInstallBinary = cb => {
 
 	shell.cp(
 		path.join(
+			__dirname,
 			".bin",
 			`grpc_node.node-${commander.platform}-${commander.architecture}`
 		),
@@ -87,6 +105,7 @@ const pkgInstallBinary = cb => {
 	);
 	shell.cp(
 		path.join(
+			__dirname,
 			".bin",
 			`math-grpc-node-server-${commander.platform}-${commander.architecture}`
 		),
@@ -97,15 +116,14 @@ const pkgInstallBinary = cb => {
 };
 
 const clean = cb => {
-	shell.rm("-rf", ".bin");
-	shell.rm("-rf", ".build");
-	shell.rm("-rf", ".generated");
+	shell.rm("-rf", path.join(__dirname, ".bin"));
+	shell.rm("-rf", path.join(__dirname, ".generated"));
 
 	cb();
 };
 
 const run = cb => {
-	shell.exec(path.join(".build", "index.js", "index.js"));
+	shell.exec(path.join(__dirname, ".build", "index.js", "index.js"));
 
 	cb();
 };
