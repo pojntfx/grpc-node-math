@@ -1,6 +1,6 @@
 {
 	"name": "mather.js",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
 	"main": "./src/lib/svc/math.js",
 	"bin": {
