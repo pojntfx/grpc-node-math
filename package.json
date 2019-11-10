@@ -1,6 +1,6 @@
 {
 	"name": "mather.js",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
 	"main": "./src/lib/svc/math.js",
 	"bin": {
@@ -32,13 +32,11 @@
 		"url": "https://github.com/pojntfx/grpc-node-math/issues"
 	},
 	"homepage": "https://github.com/pojntfx/grpc-node-math#readme",
-	"devDependencies": {
+	"dependencies": {
 		"grpc-tools": "^1.8.0",
 		"gulp": "^4.0.2",
 		"pkg": "^4.4.0",
-		"shelljs": "^0.8.3"
-	},
-	"dependencies": {
+		"shelljs": "^0.8.3",
 		"commander": "^4.0.0",
 		"google-protobuf": "^3.10.0",
 		"grpc": "^1.24.2"
