@@ -33,5 +33,5 @@ deploy:
         api_key:
                 secure: TmP5Xl+Cg7bCSOX/ra4eOWif1O1B3sP0RRW0NW69TMQNgRtalfCchZJyEW0XauUH5Qcsq03s+TTp0jb3C5U7FKXkl/C5rkdh825yBCREtVmy6r9J0lZHSMej0WabHg5ccCY9KDZbSHWw1kxOfPihIJqjEcUai5mKXebjN9ynPXcWvywSMGx0YSy9YeVaTrIRn4o4XQbwxJ4fzhCQJKev/fljsO0B85O2fIXcb7BToyHll8/BF3k0AmjfLQMmoguGoD3K4BI5ZS5YRYb2bCsZsJx1NYdjTQlLzsOVUEIXlg6x1kh9wb1+BUTyrKwxe7MyoMz7lLvx8iSbvCA7PZVlst9bfCgmxn0KtAIyTNV9NE5tYKYjdBmOOJ4Slg549KVX4EAvPeCf7R5RGuL7++Yvc08/tCNno4J86M38Hq8BLQhbH601y+PCG7MkT8v8ahz65az/yBXGCd7adMHIaIQG6ANorZvZTp1NOf7kQ0b3EPMs4qaVzdeVUkt2RGmbT2kNwmltZfEQv1btgLUjxZZf6RN8ASqQ9hqmahWSZhH6g1CEF8zmDI+Kpz3Ufz3SA06Z0jgE/RRqHSnZsa0Usl+i8sjfL1kRDVGGeAfppI6oEc5djVJtgkP/B9ZgDiBmUzryo8+ORRuDnNp0GWSKrKD7GY1NZp66g122Rj8wIWIdmkY=
         on:
-                repo: pojntfx/math-grpc-node
+                repo: pojntfx/mather.js
                 all_branches: true
