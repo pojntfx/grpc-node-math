@@ -19,7 +19,6 @@ script:
         - npm run protoc-build
         - if [ "$OS" = "linux-amd64" ]; then npm run pkg-build-binary-linux-amd64; fi
         - if [ "$OS" = "darwin-amd64" ]; then npm run pkg-build-binary-darwin-amd64; fi
-
 deploy:
         - provider: releases
           file:
@@ -36,7 +35,7 @@ deploy:
         - provider: npm
           email: felix@pojtinger.com
           api_key:
-                  secure: bszlVGTJGdEMFvi8bwaTFGfKhVftSGQLt6+bEspkgLlfSV90EdRGDAt5GDkzsviq9fVfFkLApSMCpPhocnQnWBxFSFA+//kE8G4tELxPCION817yZeoD1rHe5Co+oRErfqaSBF9AfOWDLEq0ju9dqK8CTmI/3E1cRcgk0EUWcypqbzvT3rQkIT356wTTdO9yjDEziw+nx6/RxZpEd+RHYLSSNGA4bsrIDziJgScnUkiJUb39bfFejnZa2MCFz7ImOfbJ6My037gSeB57kologtpSv4MyY2T4NDln0izV8kAayjLDJPIya35qvhxlYJK0ngO48nDtYaxCuaRvok2ji39mQc1VMc6427OwzrOaWdrQvQUIGu0hP9LvVYx5QWMhngcWHZch38HQYG9IjipVLiqaakYgHatb7f6Gc9PzqurpQD6sfN+Rnh8yZ4swzv5Wq+vUpK7Z8Jn2XsPIFirPnC/OiBYd84KVzPuw3iEgnteOI5Z0BUXBa4ioQxODt+JgKMOnbMWX5UMtMARuzBdpUkpSABIVXTKgrftoZ1XpdYnVCJwDVPwxNkUA4kv9D0GWCT8KH+gFXZwycbHeY7oYt1kW53e3U2NgqInW9QaHWZ+WXLkHOeCa3eGUX31QaPzefNrtYOUdyfXKTisBZVIllsHZiLyDrmFYjN7iD6osDgY=
+                  secure: TvFIM5q5pdlsuF6GeYn8tekevGeJJiKvGyFX2OarmrQmqoFW4D2EiBqw8BPKgNnSI6mtPjKXO2tbfiGSHQg0i4xfq58Po/cH3TpdyfeQpzZdivm4wJQbo7waGj7wTTs6bkrEaRT4gFcTG6lU3cMnquEm7BXIXgsZAmeKgukLbKyH+eq6VRKMW6opS6ILfqopGHGS4xeas1ESRv1dontuVMRl09PiLlYb9SW8JBQ/V6DjnYSg31MQw4Cn+HTevPA32NodR4IXKojotaOUGT6NsUn1B87JLcZn1sjk9mAlVWIYNkcoiVrdo1VX1sffs4MmWDliDSx8vqc8QlBY+XsIq5aWebmTep5xf+0CoUBkuTe83Uwz+nM2bxE6R9SwzShxZq0bOF2GD2X3EoAQ7zEhllLNowgvbWmIXZdUA4M+uFwb01p4MuHMLe3cKney6knsBPsCIvuPBQMlRjBBjN6Bgv2affUaERDSf283o4BJC/Z1F+LXS8vWm01l2OyHjfFioUcAg4XLqJOPCVobTq+0pj///xl9hNVgtLLldRmdQtzNHcHYRTqZnXfJhNA49RDgTTWCpdMnOAisugNWpny56NPhWBSmVIK5VdS1Y/Cy0nxxQTM3fEeWfev7HYkvpMZBeMqzDDvQIKPN/BY61/PHQaq6+1bYhkbzI5PVgZvG7lg=
           on:
                   repo: pojntfx/mather.js
                   all_branches: true
