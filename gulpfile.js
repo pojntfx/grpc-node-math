@@ -123,7 +123,7 @@ const clean = cb => {
 };
 
 const run = cb => {
-	shell.exec(path.join(__dirname, ".build", "index.js", "index.js"));
+	shell.exec(path.join(__dirname, "src", "cmd", "server", "math"));
 
 	cb();
 };
