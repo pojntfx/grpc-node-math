@@ -138,21 +138,23 @@ const run = cb => {
 
 const watch = cb => {
 	const watchDirs = [
-		"./cmd/**/*",
-		"./src/lib/*.js",
-		"./src/proto/*.proto",
-		"./src/svc/*.js"
+		path.join(__dirname, "cmd", "**"),
+		path.join(__dirname, "src", "lib"),
+		path.join(__dirname, "src", "proto"),
+		path.join(__dirname, "src", "svc")
 	];
 
-	nodemon({
+	return nodemon({
 		script: path.join(
 			__dirname,
 			"cmd",
 			"mather.js-server",
 			"mather.js-server"
 		),
+		ext: "js-server js proto",
 		args: ["start"],
 		tasks: ["protocBuild"],
+		ignore: "*_pb.js",
 		watch: watchDirs,
 		done: cb
 	});
