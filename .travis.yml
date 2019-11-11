@@ -22,8 +22,8 @@ script:
 deploy:
         - provider: releases
           file:
-                  - ./.bin/math-grpc-node-server-linux-amd64
-                  - ./.bin/math-grpc-node-server-darwin-amd64
+                  - ./.bin/mather.js-server-linux-amd64
+                  - ./.bin/mather.js-server-darwin-amd64
                   - ./.bin/grpc_node.node-linux-amd64
                   - ./.bin/grpc_node.node-darwin-amd64
           api_key:
