@@ -1,4 +1,8 @@
-const { MathAddReply } = require("../../../.generated/math_pb");
+const {
+	MathAddReply,
+	MathSubtractReply
+} = require("../proto/generated/mather_pb");
+const { add, subtract } = require("../lib/mather");
 
 /**
  * Add two numbers
@@ -22,7 +26,7 @@ module.exports.add = (call, callback) => {
 
 	// Return added numbers
 	const reply = new MathAddReply();
-	reply.setResult(call.request.getFirst() + call.request.getSecond());
+	reply.setResult(add(call.request.getFirst(), call.request.getSecond()));
 	callback(null, reply);
 };
 
@@ -51,7 +55,9 @@ module.exports.subtract = (call, callback) => {
 	);
 
 	// Return subtracted numbers
-	const reply = new MathAddReply();
-	reply.setResult(call.request.getSecond() + call.request.getFirst());
+	const reply = new MathSubtractReply();
+	reply.setResult(
+		subtract(call.request.getFirst(), call.request.getSecond())
+	);
 	callback(null, reply);
 };

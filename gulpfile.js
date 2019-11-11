@@ -2,26 +2,28 @@ const gulp = require("gulp");
 const shell = require("shelljs");
 const path = require("path");
 const commander = require("commander");
+const nodemon = require("gulp-nodemon");
+
+const GENERATED_PROTO_DIR = path.join(__dirname, "src", "proto", "generated");
 
 const protocBuild = cb => {
-	shell.mkdir("-p", path.join(__dirname, ".generated"));
+	shell.mkdir("-p", GENERATED_PROTO_DIR);
 	shell.exec(
 		`${path.join(
 			__dirname,
 			"node_modules",
 			".bin",
 			"grpc_tools_node_protoc"
-		)} --js_out=import_style=commonjs,binary:.generated --grpc_out=.generated --plugin=protoc-gen-grpc=${path.join(
+		)} --js_out=import_style=commonjs,binary:${GENERATED_PROTO_DIR} --grpc_out=${GENERATED_PROTO_DIR} --plugin=protoc-gen-grpc=${path.join(
 			__dirname,
 			"node_modules",
 			".bin",
 			"grpc_tools_node_protoc_plugin"
-		)} -I${path.join(__dirname, "src", "lib", "proto")} ${path.join(
+		)} -I${path.join(__dirname, "src", "proto")} ${path.join(
 			__dirname,
 			"src",
-			"lib",
 			"proto",
-			"math.proto"
+			"mather.proto"
 		)}`
 	);
 
@@ -52,14 +54,13 @@ const pkgBuildBinary = cb => {
 			"pkg"
 		)} ${path.join(
 			__dirname,
-			"src",
 			"cmd",
-			"server",
-			"math"
+			"mather.js-server",
+			"mather.js-server"
 		)} --target ${target}-${architecture} --output ${path.join(
 			__dirname,
 			".bin",
-			`math-grpc-node-server-${commander.platform}-${commander.architecture}`
+			`mather.js-server-${commander.platform}-${commander.architecture}`
 		)}`
 	);
 
@@ -107,9 +108,9 @@ const pkgInstallBinary = cb => {
 		path.join(
 			__dirname,
 			".bin",
-			`math-grpc-node-server-${commander.platform}-${commander.architecture}`
+			`mather.js-server-${commander.platform}-${commander.architecture}`
 		),
-		path.join("/usr", "local", "bin", "math-grpc-node-server")
+		path.join("/usr", "local", "bin", "mather.js-server")
 	);
 
 	cb();
@@ -117,26 +118,43 @@ const pkgInstallBinary = cb => {
 
 const clean = cb => {
 	shell.rm("-rf", path.join(__dirname, ".bin"));
-	shell.rm("-rf", path.join(__dirname, ".generated"));
+	shell.rm("-rf", GENERATED_PROTO_DIR);
 
 	cb();
 };
 
 const run = cb => {
-	shell.exec(path.join(__dirname, "src", "cmd", "server", "math"));
+	shell.exec(
+		path.join(
+			__dirname,
+			"cmd",
+			"mather.js-server",
+			"mather.js-server"
+		)
+	);
 
 	cb();
 };
 
-const watch = () => {
-	gulp.watch(
-		[
-			"./src/cmd/**/*",
-			"./src/lib/svc/*.js",
-			"./src/lib/proto/*.proto"
-		],
-		gulp.series(protocBuild, run)
-	);
+const watch = cb => {
+	const watchDirs = [
+		"./cmd/**/*",
+		"./src/lib/*.js",
+		"./src/proto/*.proto",
+		"./src/svc/*.js"
+	];
+
+	nodemon({
+		script: path.join(
+			__dirname,
+			"cmd",
+			"mather.js-server",
+			"mather.js-server"
+		),
+		tasks: ["protocBuild"],
+		watch: watchDirs,
+		done: cb
+	});
 };
 
 exports.default = protocBuild;

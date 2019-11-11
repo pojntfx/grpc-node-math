@@ -4,8 +4,8 @@ const {
 	Server,
 	ServerCredentials: { createInsecure }
 } = require("grpc");
-const { MathService } = require("../../../.generated/math_grpc_pb");
-const mathServiceImplementation = require("../../lib/svc/math");
+const { MathService } = require("../../src/proto/generated/mather_grpc_pb");
+const mathServiceImplementation = require("../../src/svc/mather");
 const commander = require("commander");
 
 // The port to run the gRPC server on
