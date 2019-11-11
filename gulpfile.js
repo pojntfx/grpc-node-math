@@ -129,7 +129,7 @@ const run = cb => {
 			__dirname,
 			"cmd",
 			"mather.js-server",
-			"mather.js-server"
+			"mather.js-server start"
 		)
 	);
 
@@ -151,6 +151,7 @@ const watch = cb => {
 			"mather.js-server",
 			"mather.js-server"
 		),
+		args: ["start"],
 		tasks: ["protocBuild"],
 		watch: watchDirs,
 		done: cb
