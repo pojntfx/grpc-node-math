@@ -25,7 +25,7 @@ npm install -g mather.js # Please use `nvm` to prevent any permission issues
 mather.js-server start
 ```
 
-### From Source (Interpreter)
+### From Source (Toolchain)
 
 ```bash
 # Install dependencies
