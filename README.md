@@ -1,6 +1,6 @@
-# Felicitas Pojtinger's Math gRPC Node Microservice
+# Mather Service (in Node)
 
-A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.
+Simple Node gRPC microservice that does math.
 
 [![Build Status](https://travis-ci.com/pojntfx/mather.js.svg?branch=master)](https://travis-ci.com/pojntfx/mather.js)
 
@@ -11,63 +11,74 @@ A simple math GRPC microservice, for the purpose of learning and evaluating Node
 
 ## Usage
 
-### Pre-Built Binaries
+### From Prebuilt Binaries
 
-Binaries are made available on the [releases page](https://github.com/pojntfx/math-grpc-node/releases/latest). Place the `grpc_node.node-${PLATFORM}-${ARCHITECTURE}`-file in the same directory as the binary itself. It contains the gRPC C library, which can't be packaged into the binary. Note: There is currently no way to use this microservice on `arm64`; see [#14741](https://github.com/grpc/grpc/issues/14741).
+Prebuilt binaries are available on the [releases page](https://github.com/pojntfx/mather.js/releases/latest).
 
-### npm Package
+### From npm
 
-```bash
+```
 # Install
-npm install -g pojntfx/math-grpc-node
+npm install -g mather.js # Please use `nvm` to prevent any permission issues
 
 # Run
-math-grpc-node-server
+mather.js-server start
 ```
 
-### From Source Without Building Binaries
+### From Source (Interpreter)
 
 ```bash
-# Build protos
-npm run protoc-build
+# Install dependencies
+npm install
+
+# Clean (optional)
+npm run clean
+
+# Build
+npm run build
 
 # Run
 npm start
 ```
 
-### From Source With Building Binaries
+### From Source (Binary)
 
 ```bash
-# Build protos
-npm run protoc-build
+# Install dependencies
+npm install
+
+# Clean (optional)
+npm run clean
 
 # Build
-npm run build-pkg-linux-amd64
-# or
-# npm run build-pkg-linux-arm64
-# or
-npm run build-pkg-darwin-amd64
+npm run build
 
-# Install
-sudo install ./.bin/math-grpc-node-server-linux-amd64 /usr/local/bin
-sudo install ./.bin/grpc_node.node-linux-amd64 /usr/local/bin
+# Build binary (with `pkg`)
+npm run pkg-build-binary-linux-amd64
 # or
-# sudo install ./.bin/math-grpc-node-server-linux-arm64 /usr/local/bin
-# sudo install ./.bin/grpc_node.node-linux-arm64 /usr/local/bin
+npm run pkg-build-binary-darwin-amd64
+
+# Install binary (from `pkg`)
+npm run pkg-install-binary-linux-amd64
 # or
-sudo install ./.bin/math-grpc-node-server-darwin-amd64 /usr/local/bin
-sudo install ./.bin/grpc_node.node-darwin-amd64 /usr/local/bin
+npm run pkg-install-binary-darwin-amd64
 
 # Run
-math-grpc-node-server-linux-amd64
-# or
-# math-grpc-node-server-linux-arm64
-# or
-math-grpc-node-server-darwin-amd64
+mather.js-server start
+```
+
+### From Source (Development)
+
+```
+# Install dependencies
+npm install
+
+# Watch, run and reload
+npm run dev
 ```
 
 ## License
 
-gRPC Node Math Microservice (c) 2019 Felicitas Pojtinger
+Mather Service (in Node) (c) 2019 Felicitas Pojtinger
 
 SPDX-License-Identifier: AGPL-3.0
