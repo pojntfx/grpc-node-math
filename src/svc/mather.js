@@ -1,3 +1,4 @@
+const grpc = require("grpc");
 const {
 	MathAddReply,
 	MathSubtractReply
@@ -10,15 +11,22 @@ const { add, subtract } = require("../lib/mather");
 module.exports.add = (call, callback) => {
 	// Validate input
 	if (call.request.getFirst() === 0) {
-		console.error("could not add, `First` has not been provided");
+		return callback({
+			message: "Could not add, `First` has not been provided",
+			status: grpc.status.INVALID_ARGUMENT
+		});
 	}
 	if (!call.request.getSecond() === 0) {
-		console.error("could not add, `Second` has not been provided");
+		return callback({
+			message:
+				"Could not add, `Second` has not been provided",
+			status: grpc.status.INVALID_ARGUMENT
+		});
 	}
 
 	// Log progress
 	console.log(
-		"adding",
+		"Adding",
 		call.request.getFirst(),
 		"to",
 		call.request.getSecond()
@@ -36,22 +44,25 @@ module.exports.add = (call, callback) => {
 module.exports.subtract = (call, callback) => {
 	// Validate input
 	if (call.request.getFirst() === 0) {
-		console.error(
-			"could not subtract, `First` has not been provided"
-		);
+		return callback({
+			message: "Could not add, `First` has not been provided",
+			status: grpc.status.INVALID_ARGUMENT
+		});
 	}
 	if (!call.request.getSecond() === 0) {
-		console.error(
-			"could not subtract, `Second` has not been provided"
-		);
+		return callback({
+			message:
+				"Could not add, `Second` has not been provided",
+			status: grpc.status.INVALID_ARGUMENT
+		});
 	}
 
 	// Log progress
 	console.log(
-		"subtracting",
-		call.request.getSecond(),
+		"Subtracting",
+		call.request.getFirst(),
 		"from",
-		call.request.getFirst()
+		call.request.getSecond()
 	);
 
 	// Return subtracted numbers

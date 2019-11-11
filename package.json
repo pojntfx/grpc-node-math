@@ -1,7 +1,7 @@
 {
 	"name": "mather.js",
-	"version": "0.0.10",
-	"description": "A simple math GRPC microservice, for the purpose of learning and evaluating Node and gRPC.",
+	"version": "0.0.11",
+	"description": "Simple Node gRPC microservice that does math.",
 	"main": "./src/lib/mather.js",
 	"bin": {
 		"mather.js-server": "./cmd/mather.js-server/mather.js-server"
