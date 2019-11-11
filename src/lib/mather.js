@@ -1,9 +1,9 @@
 /**
- * Add two numbers
+ * add adds two numbers
  */
 module.exports.add = (first, second) => first + second;
 
 /**
- * Subtract two numbers
+ * subtract subtracts two numbers
  */
 module.exports.subtract = (first, second) => second - first;

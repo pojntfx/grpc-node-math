@@ -6,7 +6,7 @@ const {
 const { add, subtract } = require("../lib/mather");
 
 /**
- * Add two numbers
+ * add adds two numbers
  */
 module.exports.add = (call, callback) => {
 	// Validate input
@@ -39,7 +39,7 @@ module.exports.add = (call, callback) => {
 };
 
 /**
- * Subtract two numbers
+ * subtract subtracts two numbers
  */
 module.exports.subtract = (call, callback) => {
 	// Validate input
