@@ -13,7 +13,7 @@ commander
   .description("Simple Node gRPC microservice that does math.")
   .command("start")
   .description("Starts the server")
-  .option("-p, --port PORT", "Server's port (by default :30000)")
+  .option("-p, --port PORT", "Server's port (default \":30000\")")
   .action((_, cmd) => {
     const port = (cmd && cmd[0]) || ":30000";
 
