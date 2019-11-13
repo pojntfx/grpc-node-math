@@ -12,18 +12,19 @@ const log = require("pino")();
 module.exports.add = (call, callback) => {
 	// Validate input
 	if (call.request.getFirst() === 0) {
-		log.error("Could not add, `First` has not been provided");
+		const msg = "Could not add, `First` has not been provided";
+		log.error(msg);
 		return callback({
-			message: "Could not add, `First` has not been provided",
-			status: grpc.status.INVALID_ARGUMENT
+			message: msg,
+			code: grpc.status.INVALID_ARGUMENT
 		});
 	}
 	if (!call.request.getSecond() === 0) {
-		log.error("Could not add, `Second` has not been provided");
+		const msg = "Could not add, `Second` has not been provided";
+		log.error(msg);
 		return callback({
-			message:
-				"Could not add, `Second` has not been provided",
-			status: grpc.status.INVALID_ARGUMENT
+			message: msg,
+			code: grpc.status.INVALID_ARGUMENT
 		});
 	}
 
@@ -47,18 +48,20 @@ module.exports.add = (call, callback) => {
 module.exports.subtract = (call, callback) => {
 	// Validate input
 	if (call.request.getFirst() === 0) {
-		log.error("Could not add, `First` has not been provided");
+		const msg = "Could not subtract, `First` has not been provided";
+		log.error(msg);
 		return callback({
-			message: "Could not add, `First` has not been provided",
-			status: grpc.status.INVALID_ARGUMENT
+			message: msg,
+			code: grpc.status.INVALID_ARGUMENT
 		});
 	}
 	if (!call.request.getSecond() === 0) {
-		log.error("Could not add, `Second` has not been provided");
+		const msg =
+			"Could not subtract, `Second` has not been provided";
+		log.error(msg);
 		return callback({
-			message:
-				"Could not add, `Second` has not been provided",
-			status: grpc.status.INVALID_ARGUMENT
+			message: msg,
+			code: grpc.status.INVALID_ARGUMENT
 		});
 	}
 
