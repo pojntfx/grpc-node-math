@@ -17,13 +17,11 @@ script:
 
 _test_pkg_script: &_test_pkg_script
         script:
-                - if ! [ -f "/usr/local/bin/node" ]; then sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" "/usr/local/bin/node"; fi
-                - if ! [ -f "/usr/local/bin/npm" ]; then sudo ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" "/usr/local/bin/npm"; fi
                 - npm run build
                 - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-build-binary-linux-amd64; fi
                 - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-build-binary-darwin-amd64; fi
-                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo npm run pkg-install-binary-linux-amd64; fi
-                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then sudo npm run pkg-install-binary-darwin-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo -E env "PATH=$PATH" npm run pkg-install-binary-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then sudo -E env "PATH=$PATH" npm run pkg-install-binary-darwin-amd64; fi
                 - mather.js-server --version
                 - sudo rm `which mather.js-server`
 jobs:
