@@ -1,25 +1,53 @@
 language: node_js
 node_js:
         - "12"
+
 os:
         - linux
         - osx
 dist: bionic
+osx_image: xcode11.2
+
+script:
+        - npm run build
+        - npm pack
+        - sudo npm i -g *.tgz
+        - mather.js-server --version
+        - sudo rm `which mather.js-server`
+
+_test_pkg_script: &_test_pkg_script
+        script:
+                - npm run build
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-build-binary-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-build-binary-darwin-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-install-binary-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-install-binary-darwin-amd64; fi
+                - mather.js-server --version
+                - sudo rm `which mather.js-server`
 jobs:
         include:
-                - os: linux
-                  arch: amd64
-                  env: OS=linux-amd64
-                - os: osx
-                  arch: amd64
-                  env: OS=darwin-amd64
-script:
-        - if [ -d node_modules/ ]; then rm -rf ./node_modules/; fi
-        - npm ci
-        - npm run protoc-build
-        - if [ "$OS" = "linux-amd64" ]; then npm run pkg-build-binary-linux-amd64; fi
-        - if [ "$OS" = "darwin-amd64" ]; then npm run pkg-build-binary-darwin-amd64; fi
+                - <<: *_test_pkg_script
+                  stage: test-pkg
+                  name: Test (with `pkg`) on Linux
+                  os: linux
+                  dist: bionic
+                - <<: *_test_pkg_script
+                  stage: test-pkg
+                  name: Test (with `pkg`) on Darwin
+                  os: osx
+                  osx_image: xcode11.2
+
 deploy:
+        - provider: npm
+          email: felicitas@pojtinger.com
+          api_key:
+                  secure: TvFIM5q5pdlsuF6GeYn8tekevGeJJiKvGyFX2OarmrQmqoFW4D2EiBqw8BPKgNnSI6mtPjKXO2tbfiGSHQg0i4xfq58Po/cH3TpdyfeQpzZdivm4wJQbo7waGj7wTTs6bkrEaRT4gFcTG6lU3cMnquEm7BXIXgsZAmeKgukLbKyH+eq6VRKMW6opS6ILfqopGHGS4xeas1ESRv1dontuVMRl09PiLlYb9SW8JBQ/V6DjnYSg31MQw4Cn+HTevPA32NodR4IXKojotaOUGT6NsUn1B87JLcZn1sjk9mAlVWIYNkcoiVrdo1VX1sffs4MmWDliDSx8vqc8QlBY+XsIq5aWebmTep5xf+0CoUBkuTe83Uwz+nM2bxE6R9SwzShxZq0bOF2GD2X3EoAQ7zEhllLNowgvbWmIXZdUA4M+uFwb01p4MuHMLe3cKney6knsBPsCIvuPBQMlRjBBjN6Bgv2affUaERDSf283o4BJC/Z1F+LXS8vWm01l2OyHjfFioUcAg4XLqJOPCVobTq+0pj///xl9hNVgtLLldRmdQtzNHcHYRTqZnXfJhNA49RDgTTWCpdMnOAisugNWpny56NPhWBSmVIK5VdS1Y/Cy0nxxQTM3fEeWfev7HYkvpMZBeMqzDDvQIKPN/BY61/PHQaq6+1bYhkbzI5PVgZvG7lg=
+          on:
+                  repo: pojntfx/mather.js
+                  all_branches: true
+                  tags: true
+                  condition: $TRAVIS_OS_NAME = linux && $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
+          skip_cleanup: true
         - provider: releases
           file:
                   - ./.bin/mather.js-server-linux-amd64
@@ -31,13 +59,4 @@ deploy:
           on:
                   repo: pojntfx/mather.js
                   all_branches: true
-          skip_cleanup: true
-        - provider: npm
-          email: felicitas@pojtinger.com
-          api_key:
-                  secure: TvFIM5q5pdlsuF6GeYn8tekevGeJJiKvGyFX2OarmrQmqoFW4D2EiBqw8BPKgNnSI6mtPjKXO2tbfiGSHQg0i4xfq58Po/cH3TpdyfeQpzZdivm4wJQbo7waGj7wTTs6bkrEaRT4gFcTG6lU3cMnquEm7BXIXgsZAmeKgukLbKyH+eq6VRKMW6opS6ILfqopGHGS4xeas1ESRv1dontuVMRl09PiLlYb9SW8JBQ/V6DjnYSg31MQw4Cn+HTevPA32NodR4IXKojotaOUGT6NsUn1B87JLcZn1sjk9mAlVWIYNkcoiVrdo1VX1sffs4MmWDliDSx8vqc8QlBY+XsIq5aWebmTep5xf+0CoUBkuTe83Uwz+nM2bxE6R9SwzShxZq0bOF2GD2X3EoAQ7zEhllLNowgvbWmIXZdUA4M+uFwb01p4MuHMLe3cKney6knsBPsCIvuPBQMlRjBBjN6Bgv2affUaERDSf283o4BJC/Z1F+LXS8vWm01l2OyHjfFioUcAg4XLqJOPCVobTq+0pj///xl9hNVgtLLldRmdQtzNHcHYRTqZnXfJhNA49RDgTTWCpdMnOAisugNWpny56NPhWBSmVIK5VdS1Y/Cy0nxxQTM3fEeWfev7HYkvpMZBeMqzDDvQIKPN/BY61/PHQaq6+1bYhkbzI5PVgZvG7lg=
-          on:
-                  repo: pojntfx/mather.js
-                  all_branches: true
-                  condition: $OS = linux-amd64 && $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
           skip_cleanup: true
