@@ -11,7 +11,7 @@ osx_image: xcode11.2
 script:
         - npm run build
         - npm pack
-        - sudo npm i -g *.tgz
+        - sudo `which npm` install -g *.tgz
         - mather.js-server --version
         - sudo rm `which mather.js-server`
 
