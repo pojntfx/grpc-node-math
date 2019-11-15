@@ -4,6 +4,7 @@ const path = require("path");
 const commander = require("commander");
 const nodemon = require("gulp-nodemon");
 const jest = require("jest");
+const log = require("pino")();
 
 const GENERATED_PROTO_DIR = path.join(__dirname, "src", "proto", "generated");
 
@@ -147,6 +148,20 @@ const unitTests = async cb => {
 	cb();
 };
 
+const integrationTests = cb => {
+	shell.exec("npm pack");
+
+	shell.exec("npm install -g *.tgz");
+
+	shell.exec("mather.js-server --version");
+
+	shell.rm(shell.which("mather.js-server"));
+
+	log.info("Passed");
+
+	cb();
+};
+
 const watch = cb => {
 	const watchDirs = [
 		path.join(__dirname, "cmd", "**"),
@@ -178,4 +193,5 @@ exports.pkgInstallBinary = pkgInstallBinary;
 exports.clean = clean;
 exports.run = run;
 exports.unitTests = unitTests;
+exports.integrationTests = integrationTests;
 exports.watch = gulp.series(protocBuild, watch);
