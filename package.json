@@ -19,7 +19,8 @@
 		"watch": "gulp watch",
 		"dev": "npm run watch",
 		"prepublishOnly": "npm run build",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"unitTests": "gulp unitTests",
+		"test": "npm run unitTests"
 	},
 	"repository": {
 		"type": "git",
@@ -39,10 +40,11 @@
 		"pino": "^5.13.6"
 	},
 	"devDependencies": {
-		"shelljs": "^0.8.3",
 		"grpc-tools": "^1.8.0",
 		"gulp": "^4.0.2",
-		"pkg": "^4.4.0"
+		"jest": "^24.9.0",
+		"pkg": "^4.4.0",
+		"shelljs": "^0.8.3"
 	},
 	"publishConfig": {
 		"access": "public"

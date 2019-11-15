@@ -3,6 +3,7 @@ const shell = require("shelljs");
 const path = require("path");
 const commander = require("commander");
 const nodemon = require("gulp-nodemon");
+const jest = require("jest");
 
 const GENERATED_PROTO_DIR = path.join(__dirname, "src", "proto", "generated");
 
@@ -136,6 +137,16 @@ const run = cb => {
 	cb();
 };
 
+const unitTests = async cb => {
+	const options = {
+		projects: [__dirname]
+	};
+
+	await jest.runCLI(options, options.projects);
+
+	cb();
+};
+
 const watch = cb => {
 	const watchDirs = [
 		path.join(__dirname, "cmd", "**"),
@@ -166,4 +177,5 @@ exports.pkgBuildBinary = pkgBuildBinary;
 exports.pkgInstallBinary = pkgInstallBinary;
 exports.clean = clean;
 exports.run = run;
+exports.unitTests = unitTests;
 exports.watch = gulp.series(protocBuild, watch);
