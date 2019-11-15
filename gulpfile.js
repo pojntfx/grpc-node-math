@@ -1,12 +1,12 @@
 const gulp = require("gulp");
 const shell = require("shelljs");
 const path = require("path");
-const commander = require("commander");
 const nodemon = require("gulp-nodemon");
 const jest = require("jest");
 const log = require("pino")();
 
 const GENERATED_PROTO_DIR = path.join(__dirname, "src", "proto", "generated");
+const INSTALL_LOCATION = path.join("/usr", "local", "bin", "mather.js-server");
 
 const protocBuild = cb => {
 	shell.mkdir("-p", GENERATED_PROTO_DIR);
@@ -33,19 +33,7 @@ const protocBuild = cb => {
 };
 
 const pkgBuildBinary = cb => {
-	commander.option(
-		"-p, --platform <platform>",
-		"Platform to build the binary for"
-	);
-	commander.option(
-		"-a, --architecture <architecture>",
-		"Architecture to build the binary for"
-	);
-	commander.parse(process.argv);
-
-	shell.mkdir("-p", path.join(__dirname, ".bin"));
-
-	const target = commander.platform === "darwin" ? "macos" : "linux";
+	const target = process.env.PLATFORM === "darwin" ? "macos" : "linux";
 	const architecture = "x64";
 
 	shell.exec(
@@ -62,7 +50,7 @@ const pkgBuildBinary = cb => {
 		)} --target ${target}-${architecture} --output ${path.join(
 			__dirname,
 			".bin",
-			`mather.js-server-${commander.platform}-${commander.architecture}`
+			`mather.js-server-${process.env.PLATFORM}-${process.env.ARCHITECTURE}`
 		)}`
 	);
 
@@ -80,7 +68,7 @@ const pkgBuildBinary = cb => {
 		path.join(
 			__dirname,
 			".bin",
-			`grpc_node.node-${commander.platform}-${commander.architecture}`
+			`grpc_node.node-${process.env.PLATFORM}-${process.env.ARCHITECTURE}`
 		)
 	);
 
@@ -88,21 +76,11 @@ const pkgBuildBinary = cb => {
 };
 
 const pkgInstallBinary = cb => {
-	commander.option(
-		"-p, --platform <platform>",
-		"Platform to build the binary for"
-	);
-	commander.option(
-		"-a, --architecture <architecture>",
-		"Architecture to build the binary for"
-	);
-	commander.parse(process.argv);
-
 	shell.cp(
 		path.join(
 			__dirname,
 			".bin",
-			`grpc_node.node-${commander.platform}-${commander.architecture}`
+			`grpc_node.node-${process.env.PLATFORM}-${process.env.ARCHITECTURE}`
 		),
 		path.join("/usr", "local", "bin", "grpc_node.node")
 	);
@@ -110,9 +88,9 @@ const pkgInstallBinary = cb => {
 		path.join(
 			__dirname,
 			".bin",
-			`mather.js-server-${commander.platform}-${commander.architecture}`
+			`mather.js-server-${process.env.PLATFORM}-${process.env.ARCHITECTURE}`
 		),
-		path.join("/usr", "local", "bin", "mather.js-server")
+		INSTALL_LOCATION
 	);
 
 	cb();
@@ -162,6 +140,18 @@ const integrationTests = cb => {
 	cb();
 };
 
+const pkgBinaryIntegrationTests = cb => {
+	pkgInstallBinary(() => {});
+
+	shell.exec("mather.js-server --version");
+
+	shell.rm(INSTALL_LOCATION);
+
+	log.info("Passed");
+
+	cb();
+};
+
 const watch = cb => {
 	const watchDirs = [
 		path.join(__dirname, "cmd", "**"),
@@ -194,4 +184,5 @@ exports.clean = clean;
 exports.run = run;
 exports.unitTests = unitTests;
 exports.integrationTests = integrationTests;
+exports.pkgBinaryIntegrationTests = pkgBinaryIntegrationTests;
 exports.watch = gulp.series(protocBuild, watch);
