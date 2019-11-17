@@ -9,21 +9,22 @@ dist: bionic
 osx_image: xcode11.2
 
 script:
+        - npm run clean
         - npm run build
-        - npm pack
-        - npm install -g *.tgz
-        - mather.js-server --version
-        - sudo rm `which mather.js-server`
+        - npm test
+        - npm run integration-tests
 
 _test_pkg_script: &_test_pkg_script
         script:
+                - npm run clean
                 - npm run build
-                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-build-binary-linux-amd64; fi
-                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-build-binary-darwin-amd64; fi
-                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo -E env "PATH=$PATH" npm run pkg-install-binary-linux-amd64; fi
-                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then sudo -E env "PATH=$PATH" npm run pkg-install-binary-darwin-amd64; fi
-                - mather.js-server --version
-                - sudo rm `which mather.js-server`
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-binary-build-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-binary-build-darwin-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo -E env "PATH=$PATH" npm run pkg-binary-install-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then sudo -E env "PATH=$PATH" npm run pkg-binary-install-darwin-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "linux" ]; then npm run pkg-binary-integration-tests-linux-amd64; fi
+                - if [ "$TRAVIS_OS_NAME" = "osx" ]; then npm run pkg-binary-integration-tests-darwin-amd64; fi
+
 jobs:
         include:
                 - <<: *_test_pkg_script
