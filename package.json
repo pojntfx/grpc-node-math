@@ -1,6 +1,6 @@
 {
 	"name": "mather.js",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"description": "Simple Node gRPC microservice that does math.",
 	"main": "./src/lib/mather.js",
 	"bin": {
@@ -8,33 +8,31 @@
 	},
 	"scripts": {
 		"protoc-build": "gulp",
-		"build": "npm run protoc-build",
-		"pkg-build-binary-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBuildBinary",
-		"pkg-build-binary-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBuildBinary",
-		"pkg-install-binary-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgInstallBinary",
-		"pkg-install-binary-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgInstallBinary",
+		"build": "npm run build",
+		"pkg-binary-build-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryBuild",
+		"pkg-binary-build-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBinaryBuild",
+		"pkg-binary-install-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryInstall",
+		"pkg-binary-install-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBinaryInstall",
 		"clean": "gulp clean",
-		"run": "gulp run",
 		"start": "npm run run",
-		"watch": "gulp watch",
-		"dev": "npm run watch",
-		"prepublishOnly": "npm run build",
 		"unit-tests": "gulp unitTests",
-		"integration-tests": "gulp unitTests",
+		"integration-tests": "gulp integrationTests",
+		"test": "npm run unit-tests",
 		"pkg-binary-integration-tests-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryIntegrationTests",
 		"pkg-binary-integration-tests-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBinaryIntegrationTests",
-		"test": "npm run unitTests"
+		"dev": "npm run watch",
+		"prepublishOnly": "npm run build"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/pojntfx/grpc-node-math.git"
+		"url": "git+https://github.com/pojntfx/mather.js.git"
 	},
 	"author": "Felicitas Pojtinger <felicitas@pojtinger.com>",
 	"license": "AGPL-3.0",
 	"bugs": {
-		"url": "https://github.com/pojntfx/grpc-node-math/issues"
+		"url": "https://github.com/pojntfx/mather.js/issues"
 	},
-	"homepage": "https://github.com/pojntfx/grpc-node-math#readme",
+	"homepage": "https://github.com/pojntfx/mather.js#readme",
 	"dependencies": {
 		"commander": "^4.0.0",
 		"google-protobuf": "^3.10.0",

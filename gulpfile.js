@@ -32,7 +32,7 @@ const protocBuild = cb => {
 	cb();
 };
 
-const pkgBuildBinary = cb => {
+const pkgBinaryBuild = cb => {
 	const target = process.env.PLATFORM === "darwin" ? "macos" : "linux";
 	const architecture = "x64";
 
@@ -75,7 +75,7 @@ const pkgBuildBinary = cb => {
 	cb();
 };
 
-const pkgInstallBinary = cb => {
+const pkgBinaryInstall = cb => {
 	shell.cp(
 		path.join(
 			__dirname,
@@ -103,7 +103,7 @@ const clean = cb => {
 	cb();
 };
 
-const run = cb => {
+const start = cb => {
 	shell.exec(
 		path.join(
 			__dirname,
@@ -141,7 +141,7 @@ const integrationTests = cb => {
 };
 
 const pkgBinaryIntegrationTests = cb => {
-	pkgInstallBinary(() => {});
+	pkgBinaryInstall(() => {});
 
 	shell.exec("mather.js-server --version");
 
@@ -152,7 +152,7 @@ const pkgBinaryIntegrationTests = cb => {
 	cb();
 };
 
-const watch = cb => {
+const dev = cb => {
 	const watchDirs = [
 		path.join(__dirname, "cmd", "**"),
 		path.join(__dirname, "src", "lib"),
@@ -178,11 +178,12 @@ const watch = cb => {
 
 exports.default = protocBuild;
 exports.protocBuild = protocBuild;
-exports.pkgBuildBinary = pkgBuildBinary;
-exports.pkgInstallBinary = pkgInstallBinary;
+exports.build = protocBuild;
+exports.pkgBinaryBuild = pkgBinaryBuild;
+exports.pkgBinaryInstall = pkgBinaryInstall;
 exports.clean = clean;
-exports.run = run;
+exports.start = start;
 exports.unitTests = unitTests;
 exports.integrationTests = integrationTests;
 exports.pkgBinaryIntegrationTests = pkgBinaryIntegrationTests;
-exports.watch = gulp.series(protocBuild, watch);
+exports.dev = gulp.series(protocBuild, dev);
