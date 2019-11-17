@@ -17,15 +17,17 @@ Prebuilt binaries are available on the [releases page](https://github.com/pojntf
 
 ### From npm
 
-```
+```bash
 # Install
-npm install -g mather.js # Please use `nvm` to prevent any permission issues
+npm install mather.js # Please use `nvm` to prevent permission errors
 
 # Run
 mather.js-server start
 ```
 
-### From Source (Toolchain)
+### From Source
+
+#### Prerequisites
 
 ```bash
 # Install dependencies
@@ -36,44 +38,59 @@ npm run clean
 
 # Build
 npm run build
+```
 
+#### Start With Toolchain
+
+```bash
 # Run
 npm start
 ```
 
-### From Source (Binary)
+#### Start As Standalone Binary
 
 ```bash
-# Install dependencies
-npm install
-
-# Clean (optional)
-npm run clean
-
-# Build
-npm run build
-
 # Build binary (with `pkg`)
-npm run pkg-build-binary-linux-amd64
+npm run pkg-binary-build-linux-amd64
 # or
-npm run pkg-build-binary-darwin-amd64
+npm run pkg-binary-build-darwin-amd64
 
 # Install binary (from `pkg`)
-npm run pkg-install-binary-linux-amd64
+sudo -E env "PATH=$PATH" npm run pkg-binary-install-linux-amd64
 # or
-npm run pkg-install-binary-darwin-amd64
+sudo -E env "PATH=$PATH" npm run pkg-binary-install-darwin-amd64
 
 # Run
 mather.js-server start
 ```
 
-### From Source (Development)
+#### Unit Tests
 
+```bash
+# Start unit tests
+npm test
 ```
-# Install dependencies
-npm install
 
-# Watch, run and reload
+#### Integration Tests
+
+```bash
+# Start integration tests
+npm run integration-tests
+```
+
+#### Integration Tests (For Standalone Binary)
+
+```bash
+# Start integration tests (for standalone binary)
+sudo -E env "PATH=$PATH" npm run pkg-binary-integration-tests-linux-amd64
+# or
+sudo -E env "PATH=$PATH" npm run pkg-binary-integration-tests-darwin-amd64
+```
+
+#### Development
+
+```bash
+# Start unit tests, start server and restart both if source changed
 npm run dev
 ```
 

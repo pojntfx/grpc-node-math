@@ -8,7 +8,7 @@
 	},
 	"scripts": {
 		"protoc-build": "gulp",
-		"build": "npm run build",
+		"build": "npm run protoc-build",
 		"pkg-binary-build-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryBuild",
 		"pkg-binary-build-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBinaryBuild",
 		"pkg-binary-install-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryInstall",
@@ -20,7 +20,7 @@
 		"test": "npm run unit-tests",
 		"pkg-binary-integration-tests-linux-amd64": "PLATFORM=linux ARCHITECTURE=amd64 gulp pkgBinaryIntegrationTests",
 		"pkg-binary-integration-tests-darwin-amd64": "PLATFORM=darwin ARCHITECTURE=amd64 gulp pkgBinaryIntegrationTests",
-		"dev": "npm run watch",
+		"dev": "gulp dev",
 		"prepublishOnly": "npm run build"
 	},
 	"repository": {
